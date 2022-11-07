@@ -1,0 +1,159 @@
+{
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": {
+            "type": "datasource",
+            "uid": "grafana"
+          },
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations & Alerts",
+          "target": {
+            "limit": 100,
+            "matchAny": false,
+            "tags": [],
+            "type": "dashboard"
+          },
+          "type": "dashboard"
+        }
+      ]
+    },
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "graphTooltip": 0,
+    "id": 8,
+    "links": [],
+    "liveNow": false,
+    "panels": [
+      {
+        "datasource": {
+          "type": "loki",
+          "uid": "R2x4iZsnk"
+        },
+        "gridPos": {
+          "h": 20,
+          "w": 24,
+          "x": 0,
+          "y": 0
+        },
+        "id": 2,
+        "options": {
+          "dedupStrategy": "none",
+          "enableLogDetails": false,
+          "prettifyLogMessage": true,
+          "showCommonLabels": false,
+          "showLabels": true,
+          "showTime": false,
+          "sortOrder": "Ascending",
+          "wrapLogMessage": false
+        },
+        "targets": [
+          {
+            "datasource": {
+              "type": "loki",
+              "uid": "R2x4iZsnk"
+            },
+            "expr": "{app=~\"$app\",pod=~\"$instance\"} |~ \"(?i)$search\" | label_format node_name=\"\",stream=\"\",container=\"\",job=\"\",pod=\"{{ .app }}/{{ .pod }}\",app=\"\"",
+            "refId": "A"
+          }
+        ],
+        "title": "Logs for $app ($instance)",
+        "type": "logs"
+      }
+    ],
+    "refresh": "5s",
+    "schemaVersion": 37,
+    "style": "dark",
+    "tags": [],
+    "templating": {
+      "list": [
+        {
+          "current": {
+            "selected": true,
+            "text": [
+              "All"
+            ],
+            "value": [
+              "$__all"
+            ]
+          },
+          "datasource": {
+            "type": "loki",
+            "uid": "R2x4iZsnk"
+          },
+          "definition": "label_values({namespace=\"xxx\"}, app)",
+          "hide": 0,
+          "includeAll": true,
+          "multi": true,
+          "name": "app",
+          "options": [],
+          "query": "label_values({namespace=\"xxx\"}, app)",
+          "refresh": 2,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 1,
+          "type": "query"
+        },
+        {
+          "current": {
+            "selected": true,
+            "text": [
+              "All"
+            ],
+            "value": [
+              "$__all"
+            ]
+          },
+          "datasource": {
+            "type": "loki",
+            "uid": "R2x4iZsnk"
+          },
+          "definition": "label_values({namespace=\"xxxxx\",app=~\"$app\"}, pod)",
+          "hide": 0,
+          "includeAll": true,
+          "multi": true,
+          "name": "instance",
+          "options": [],
+          "query": "label_values({namespace=\"xxxxx\",app=~\"$app\"}, pod)",
+          "refresh": 2,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 1,
+          "type": "query"
+        },
+        {
+          "current": {
+            "selected": true,
+            "text": "",
+            "value": ""
+          },
+          "hide": 0,
+          "label": "Recherche",
+          "name": "search",
+          "options": [
+            {
+              "selected": true,
+              "text": "",
+              "value": ""
+            }
+          ],
+          "query": "",
+          "skipUrlSync": false,
+          "type": "textbox"
+        }
+      ]
+    },
+    "time": {
+      "from": "now-15m",
+      "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "",
+    "title": "Logs",
+    "uid": "tyzjiWs7k",
+    "version": 39,
+    "weekStart": ""
+  }
